@@ -1,0 +1,40 @@
+---
+- name: Install master Jenkins
+  hosts: jenkins
+  connection: local
+  become: yes
+  # vars:
+  #   jenkins_admin_username: admin
+  #   jenkins_admin_password: admin
+  #   jenkins_plugins:
+  #     - git
+  #     - maven-plugin
+  #     - blueocean
+
+  pre_tasks:
+  - name: update apt if needed
+    apt: update_cache=yes
+  
+  roles:
+    - geerlingguy.git
+    - geerlingguy.java
+    - role: gantsign.maven
+      maven_download_timeout: 300
+
+    - geerlingguy.jenkins
+  
+- name: Install Java 8 and Tomcat on both server-staging and server-production 
+  hosts: workers
+  become: true
+  gather_facts: yes
+
+  pre_tasks:
+  - name: update apt if needed
+    apt: update_cache=yes
+  
+  roles:
+    - role: geerlingguy.java
+    - role: idealista.tomcat-role
+      tomcat_user: vagrant
+      tomcat_group: vagrant
+      

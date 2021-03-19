@@ -1,0 +1,5 @@
+# Télécharger les roles
+ansible-galaxy install -r requirements.yaml -p ./roles
+
+# Lancer le playbook
+ansible-playbook playbook-install-jenkins-ansible.yaml

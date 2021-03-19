@@ -1,0 +1,7 @@
+- src: geerlingguy.java
+- src: geerlingguy.jenkins
+- src: geerlingguy.git
+
+- src: gantsign.maven
+
+- src: idealista.tomcat-role

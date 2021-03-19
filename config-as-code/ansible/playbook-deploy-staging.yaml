@@ -1,0 +1,7 @@
+---
+- hosts: server-staging
+  become: true
+  tasks:
+    - name: Copy WAR to webapps
+      copy: src=../../greetings-app/target/greetings-0.1-SNAPSHOT.war dest=/opt/tomcat/webapps/hello.war owner=vagrant group=vagrant mode=0744
+
